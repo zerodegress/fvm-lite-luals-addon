@@ -2,7 +2,7 @@
 --- tl.lua - Type-Lua compiler and type checker.
 --- This file provides Lua Language Server definitions for the `tl` module.
 
-tl = {}
+local tl = {}
 
 --- Parses a Type-Lua program string into an AST (Abstract Syntax Tree).
 ---@param program_string string The Type-Lua source code as a string.
@@ -67,3 +67,5 @@ function tl.get_types() end
 ---@field get_collector fun(self: TypeReporter, ...): any
 ---@field store_result fun(self: TypeReporter, ...): nil
 ---@field get_report fun(self: TypeReporter, ...): table
+
+return tl

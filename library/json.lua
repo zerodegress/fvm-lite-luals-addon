@@ -1,7 +1,7 @@
 ---@meta
 --- json.lua - Provides JSON encoding and decoding functionalities.
 
-json = {}
+local json = {}
 
 ---@type string The version of the json library.
 json._version = "0.1.2"
@@ -34,3 +34,5 @@ function json.encode(val) end
 ---@raise "expected ':' after key" if a colon is missing after an object key.
 ---@raise "trailing garbage" if there are characters after the main JSON value.
 function json.decode(str) end
+
+return json

@@ -1,7 +1,7 @@
 ---@meta
 --- stable.lua - Provides stable serialization and deserialization of Lua tables.
 
-stable = {}
+local stable = {}
 
 --- Serializes a Lua table into a string representation that can be executed as Lua code.
 --- Numeric keys will be represented as `["key"] = value`, unless `nonumkey` is true.
@@ -20,3 +20,5 @@ function stable.serialize(tbl, nonumkey) end
 ---@return table The deserialized Lua table.
 ---@raise any errors that `loadstring` and the executed code might produce.
 function stable.unserlialize(code) end
+
+return stable
