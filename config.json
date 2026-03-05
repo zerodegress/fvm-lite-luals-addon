@@ -1,4 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/LuaLS/LLS-Addons/main/schemas/addon_config.schema.json",
-  "name": "FVM Lite"
+  "name": "FVM Lite",
+  "settings": {
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.runtime.builtin": {
+      "io": "disable",
+      "os": "disable"
+    }
+  }
 }
