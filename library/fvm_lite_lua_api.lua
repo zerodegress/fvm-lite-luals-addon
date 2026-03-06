@@ -101,3 +101,17 @@ function _G.PlantClassManager:createPlant(className, ident) end
 --- A global table used by the game engine (possibly Delphi/C++ backend) to store all registered plant class definitions.
 --- Mods usually interact with this indirectly via `PlantClassManager`.
 _G._PLANT_CLASSES = {}
+
+---@class EventSystemAPI
+---The global eventSystem object manages event dispatching and inter-mod communication.
+---
+---Methods:
+---@field register fun(eventName:string, callback:fun(arg1:any, ...:any):boolean|nil, priority:integer?, modName:string?):nil
+---  Registers an event listener. Return false from callback to stop propagation.
+---@field trigger fun(eventName:string, ...:any):boolean
+---  Triggers an event. Returns true if all listeners processed it, false if propagation stopped.
+---@field sendMessage fun(sender:string, msgType:string, data:any):nil
+---@field subscribe fun(msgType:string, callback:fun(sender:string, data:any), modName:string?):nil
+---@field unsubscribe fun(msgType:string, modName:string):nil
+---@field processMessages fun():nil
+---@field unregisterByMod fun(modName:string):nil
