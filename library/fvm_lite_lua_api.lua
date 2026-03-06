@@ -112,12 +112,12 @@ _G._PLANT_CLASSES = {}
 ---The global eventSystem object manages event dispatching and inter-mod communication.
 ---
 ---Methods:
----@field register fun(eventName:string, callback:fun(arg1:any, ...:any):boolean|nil, priority:integer?, modName:string?):nil
+---@field register fun(self: EventSystemAPI, eventName:string, callback:fun(arg1:any, ...:any):boolean|nil, priority:integer?, modName:string?):nil
 ---  Registers an event listener. Return false from callback to stop propagation.
----@field trigger fun(eventName:string, ...:any):boolean
+---@field trigger fun(self: EventSystemAPI, eventName:string, ...:any):boolean
 ---  Triggers an event. Returns true if all listeners processed it, false if propagation stopped.
----@field sendMessage fun(sender:string, msgType:string, data:any):nil
----@field subscribe fun(msgType:string, callback:fun(sender:string, data:any), modName:string?):nil
----@field unsubscribe fun(msgType:string, modName:string):nil
----@field processMessages fun():nil
----@field unregisterByMod fun(modName:string):nil
+---@field sendMessage fun(self: EventSystemAPI, sender:string, msgType:string, data:any):nil
+---@field subscribe fun(self: EventSystemAPI, msgType:string, callback:fun(sender:string, data:any), modName:string?):nil
+---@field unsubscribe fun(self: EventSystemAPI, msgType:string, modName:string):nil
+---@field processMessages fun(self: EventSystemAPI):nil
+---@field unregisterByMod fun(self: EventSystemAPI, modName:string):nil
