@@ -63,6 +63,12 @@ function _G.game.getPlantProperty(selfPtr, propName) end
 ---@return boolean `true` if the property was set successfully, `false` otherwise.
 function _G.game.setPlantProperty(selfPtr, propName, value) end
 
+--- Output Message in game window.
+---@param msg string Message to output.
+---@param colorCode integer Color hex code.
+---@return boolean `true` if the property was set successfully, `false` otherwise.
+function _G.game.outMessage(msg, colorCode) end
+
 ---@class PlantClassManagerAPI
 --- Manages the registration and lifecycle of Lua-defined plant classes.
 _G.PlantClassManager = {}
