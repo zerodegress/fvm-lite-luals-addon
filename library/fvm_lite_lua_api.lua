@@ -71,6 +71,13 @@ function game.setPlantProperty(selfPtr, propName, value) end
 --- @return boolean `true` if the property was set successfully, `false` otherwise.
 function game.outMessage(msg, colorCode) end
 
+--- Call method of the plant instance(via Delphi).
+--- @param instance PlantBase Plant instance.
+--- @param methodName string Method name.
+--- @param ... any[] Call parameters.
+--- @return any The method return.
+function game.callPlantMethod(instance, methodName, ...) end
+
 --- Manages the registration and lifecycle of Lua-defined plant classes.
 PlantClassManager = {}
 
