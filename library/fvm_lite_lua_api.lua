@@ -34,14 +34,16 @@ function game.dirExists(path) end
 function game.registerPlantClass(className, classTable) end
 
 --- Creates a new instance of a Lua-defined plant.
+--- @generic T:PlantBase
 --- @param luaClassName string The name of the Lua plant class to create (must be registered).
 --- @param ident string A unique identifier for this plant instance.
---- @return table|nil The created plant instance table, or `nil` if creation fails.
+--- @return T|T @ The created plant instance table, or `nil` if creation fails.
 function game.createLuaPlant(luaClassName, ident) end
 
 --- Creates a new instance of a standard (non-Lua defined) plant.
+--- @generic T:PlantBase
 --- @param ident string A unique identifier for this plant instance.
---- @return table|nil The created plant instance table, or `nil` if creation fails.
+--- @return T|nil @ The created plant instance, or `nil` if creation fails.
 function game.createPlant(ident) end
 
 --- Registers a map with the game.
@@ -118,6 +120,16 @@ function PlantClassManager:createPlant(className, ident) end
 
 --- Plant base class, all plants should inherit from this base class.
 --- @class PlantBase
+--- @field name string Plant class name.
+--- @field init fun(self: PlantBase) Initializes the plant instance. This method is typically called when a new plant instance is created. Should be overrided.
+--- @field run fun(self: PlantBase, delta: number) Run the plant instance's update logic. Should be overrided.
+--- @field render fun(self: PlantBase, progress: number, opacity: number) Render the plant instance. Should be overrided.
+--- @field log fun(self: PlantBase, message: string) Log a message associated with the plant instance.
+--- @field getSelfPtr fun(self: PlantBase): unknown Get the internal Delphi object pointer for this plant instance. This is a convenience method that calls `PlantBase:getSelf(self)`.
+--- @field get fun(self: PlantBase, propName: string): any Get a property of this plant instance. This is a convenience method that calls `PlantBase:getProperty(self, propName)`.
+--- @field set fun(self: PlantBase, propName: string, value: any): boolean Set a property of this plant instance. This is a convenience method that calls `PlantBase:setProperty(self, propName, value)`.
+--- @field call fun(self: PlantBase, methodName: string, ...: any[]): any Call a method on this plant instance. This is a convenience method that calls `PlantBase:callMethod(self, methodName, ...)`.
+
 PlantBase = {}
 
 --- Create new plant class(not instance).
@@ -156,50 +168,3 @@ function PlantBase:setProperty(instance, propName, value) end
 --- @param ... any[] Call parameters.
 --- @return any The method return.
 function PlantBase:callMethod(instance, methodName, ...) end
-
-PlantBase.__index = {}
-
---- Initialize the plant instance.
---- This method is typically called when a new plant instance is created.
---- Should be overrided.
-function PlantBase.__index:init() end
-
---- Run the plant instance's update logic.
---- Should be overrided.
---- @param delta number Time elapsed since the last frame.
-function PlantBase.__index:run(delta) end
-
---- Render the plant instance.
---- Should be overrided.
---- @param progress number Current progress of the plant.
---- @param opacity number Opacity of the plant.
-function PlantBase.__index:render(progress, opacity) end
-
---- Log a message associated with the plant instance.
---- @param message string The message to log.
-function PlantBase.__index:log(message) end
-
---- Get the internal Delphi object pointer for this plant instance.
---- This is a convenience method that calls `PlantBase:getSelf(self)`.
---- @return unknown The internal Delphi object.
-function PlantBase.__index:getSelfPtr() end
-
---- Get a property of this plant instance.
---- This is a convenience method that calls `PlantBase:getProperty(self, propName)`.
---- @param propName string Property name.
---- @return any Property value.
-function PlantBase.__index:get(propName) end
-
---- Set a property of this plant instance.
---- This is a convenience method that calls `PlantBase:setProperty(self, propName, value)`.
---- @param propName string Property name.
---- @param value any Property value.
---- @return boolean if the operation succeed.
-function PlantBase.__index:set(propName, value) end
-
---- Call a method on this plant instance.
---- This is a convenience method that calls `PlantBase:callMethod(self, methodName, ...)`.
---- @param methodName string Method name.
---- @param ... any[] Call parameters.
---- @return any The method return.
-function PlantBase.__index:call(methodName, ...) end
