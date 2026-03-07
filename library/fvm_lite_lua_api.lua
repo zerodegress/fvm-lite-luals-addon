@@ -1,7 +1,7 @@
 --! @meta
 --
 -- FVM-Lite - LuaLS Addon
--- 
+--
 -- This file provides LuaLS type annotations for the FVM-Lite game engine API.
 -- It enables intelligent code completion, type checking, and documentation
 -- in editors that support LuaLS (such as VS Code with sumneko.lua extension).
@@ -26,11 +26,11 @@
 --- ```lua
 --- -- Logging a message
 --- game.logMessage("Hello from my mod!")
---- 
+---
 --- -- Getting platform information
 --- local platform = game.getPlatform()
 --- print("Running on: " .. platform)
---- 
+---
 --- -- Checking file existence
 --- if game.fileExists("config.json") then
 ---     print("Config file exists")
@@ -132,6 +132,11 @@ function game.getCardName(cardident) end
 --- @return boolean `true` if card bag size is greater than the count, `false` otherwise.
 function game.checkCardBagSize(count) end
 
+--- Lists all files and subdirectories in the specified directory.
+--- @param dir string The path of the directory to list.
+--- @return string[] An array of file and directory names found in the specified directory, or an empty array if the directory doesn't exist or is empty.
+function game.listDirectory(dir) end
+
 --- Manages the registration and lifecycle of Lua-defined plant classes.
 --- This manager handles the registration, retrieval, and instantiation of custom plant classes.
 --- @usage
@@ -140,14 +145,14 @@ function game.checkCardBagSize(count) end
 --- -- 1. Create a plant class
 --- local MyPlant = PlantBase:new("MyPlant")
 --- -- ... define init, run, render methods
---- 
+---
 --- -- 2. Register the class
 --- PlantClassManager:registerClass("MyPlant", MyPlant, "MyMod")
---- 
+---
 --- -- 3. Create instances
 --- local instance1 = PlantClassManager:createPlant("MyPlant", "instance_1")
 --- local instance2 = PlantClassManager:createPlant("MyPlant", "instance_2")
---- 
+---
 --- -- 4. List all registered classes
 --- local allClasses = PlantClassManager:listClasses()
 --- for _, className in ipairs(allClasses) do
@@ -178,7 +183,7 @@ PlantClassManager.classes = {}
 --- MyPlantClass.init = function(self) print("Plant initialized!") end
 --- MyPlantClass.run = function(self, delta) print("Updating...") end
 --- MyPlantClass.render = function(self, progress, opacity) print("Rendering...") end
---- 
+---
 --- local success = PlantClassManager:registerClass("MyPlant", MyPlantClass, "MyMod")
 --- ```
 function PlantClassManager:registerClass(className, classTable, modName) end
@@ -231,15 +236,15 @@ function PlantClassManager:createPlant(className, ident) end
 ---     print("New plant created: " .. tostring(plantInstance))
 ---     return true -- Continue propagation
 --- end, 0, "MyMod")
---- 
+---
 --- -- Triggering an event
 --- local success = eventSystem:trigger("custom_event", "data1", "data2")
---- 
+---
 --- -- Inter-mod communication
 --- eventSystem:subscribe("chat_message", function(sender, data)
 ---     print("Message from " .. sender .. ": " .. data.message)
 --- end, "MyMod")
---- 
+---
 --- eventSystem:sendMessage("MyMod", "chat_message", {message = "Hello from MyMod!"})
 --- ```
 --- @field register fun(self: EventSystemAPI, eventName:string, callback:fun(arg1:any, ...:any):boolean|nil, priority:integer?, modName:string?):nil Registers an event listener. Return false from callback to stop propagation.
@@ -256,25 +261,25 @@ function PlantClassManager:createPlant(className, ident) end
 --- ```lua
 --- -- Creating a custom plant class
 --- local MyPlant = PlantBase:new("MyPlant")
---- 
+---
 --- -- Defining required methods
 --- MyPlant.init = function(self)
 ---     self.health = 100
 ---     self:log("MyPlant initialized!")
 --- end
---- 
+---
 --- MyPlant.run = function(self, delta)
 ---     -- Update logic here
 ---     self.health = self.health - delta * 0.1
 --- end
---- 
+---
 --- MyPlant.render = function(self, progress, opacity)
 ---     -- Rendering logic here
 --- end
---- 
+---
 --- -- Registering the class
 --- MyPlant:register("MyPlant", "MyMod")
---- 
+---
 --- -- Creating an instance
 --- local myPlantInstance = PlantClassManager:createPlant("MyPlant", "plant_001")
 --- if myPlantInstance then
