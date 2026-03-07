@@ -78,6 +78,24 @@ function game.outMessage(msg, colorCode) end
 --- @return any The method return.
 function game.callPlantMethod(instance, methodName, ...) end
 
+--- Make a move message.
+--- @param message string Message to make.
+function game.makeMoveMessage(message) end
+
+--- Give card to player.
+--- @param cardident string Card ident.
+--- @param star number Card star.
+--- @param count number Card count.
+function game.giveCard(cardident, star, count) end
+
+--- Get the name of a card.
+--- @param cardident string Card ident.
+function game.getCardName(cardident) end
+
+--- Check if card bag size is greater than the count.
+--- @param count string Count to compare.
+function game.checkCardBagSize(count) end
+
 --- Manages the registration and lifecycle of Lua-defined plant classes.
 PlantClassManager = {}
 
