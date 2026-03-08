@@ -55,6 +55,10 @@ function game.outMessage(msg, color) end
 --- @param jsonString string JSON formatted string.
 function game.outJsonMsg(jsonString) end
 
+--- Displays a move-related message in the game UI (e.g., when obtaining cards or items).
+--- @param msg string The message to display.
+function game.makeMoveMessage(msg) end
+
 --- Checks if a file exists at the given path.
 --- @param path string The file path.
 --- @return boolean `true` if the file exists, `false` otherwise.
