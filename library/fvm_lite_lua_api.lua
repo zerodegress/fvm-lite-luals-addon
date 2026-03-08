@@ -51,6 +51,17 @@ function game.logMessage(...) end
 --- @param color number|nil Optional color value (e.g., 0xFFFFFFFF for white). Default is white.
 function game.outMessage(msg, color) end
 
+--- Outputs a mod-specific message to the game UI with custom color.
+--- This is typically used for mod status messages, notifications, or announcements.
+--- @param msg string The message to display.
+--- @param color number|nil Optional color value (e.g., 0xFF00CCFF for cyan). Default is white.
+--- @usage
+--- ```lua
+--- -- Display a mod loading message with custom color
+--- game.outModMessage('[R键整理] 已加载，按"R"键或使用指令/resortcard整理卡牌', 0xFF00CCFF)
+--- ```
+function game.outModMessage(msg, color) end
+
 --- Outputs a JSON formatted message to the chat board (may be parsed and displayed with specific styling).
 --- @param jsonString string JSON formatted string.
 function game.outJsonMsg(jsonString) end
