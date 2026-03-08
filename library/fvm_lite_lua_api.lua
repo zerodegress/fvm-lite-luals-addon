@@ -119,6 +119,11 @@ function game.registerPlantClass(className, classTable) end
 --- @return userdata|nil Plant object on success, `nil` + error message on failure.
 function game.createLuaPlant(className, ident) end
 
+--- Creates a plant object with the given identifier.
+--- @param ident string Plant instance identifier.
+--- @return userdata|nil Plant object on success, `nil` + error message on failure.
+function game.createPlant(ident) end
+
 --- Gets a property from a plant object (case-insensitive).
 --- @param plant userdata Plant object.
 --- @param propName string Property name.
