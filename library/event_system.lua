@@ -1,0 +1,29 @@
+
+
+--- @class EventSystemAPI
+--- The global eventSystem object manages event dispatching and inter-mod communication.
+--- @usage
+--- ```lua
+--- -- Registering an event listener
+--- eventSystem:register("plant_created", function(plantInstance)
+---     print("New plant created: " .. tostring(plantInstance))
+---     return true -- Continue propagation
+--- end, 0, "MyMod")
+---
+--- -- Triggering an event
+--- local success = eventSystem:trigger("custom_event", "data1", "data2")
+---
+--- -- Inter-mod communication
+--- eventSystem:subscribe("chat_message", function(sender, data)
+---     print("Message from " .. sender .. ": " .. data.message)
+--- end, "MyMod")
+---
+--- eventSystem:sendMessage("MyMod", "chat_message", {message = "Hello from MyMod!"})
+--- ```
+--- @field register fun(self: EventSystemAPI, eventName:string, callback:fun(arg1:any, ...:any):boolean|nil, priority:integer?, modName:string?):nil Registers an event listener. Return false from callback to stop propagation.
+--- @field trigger fun(self: EventSystemAPI, eventName:string, ...:any):boolean Triggers an event. Returns true if all listeners processed it, false if propagation stopped.
+--- @field sendMessage fun(self: EventSystemAPI, sender:string, msgType:string, data:any):nil Send message to other mods.
+--- @field subscribe fun(self: EventSystemAPI, msgType:string, callback:fun(sender:string, data:any), modName:string?):nil Subscribe to receive messages from other mods.
+--- @field unsubscribe fun(self: EventSystemAPI, msgType:string, modName:string):nil Unsubscribe from receiving messages.
+--- @field processMessages fun(self: EventSystemAPI):nil Process pending messages in the queue.
+--- @field unregisterByMod fun(self: EventSystemAPI, modName:string):nil Unregister all event listeners and message subscriptions for a specific mod.
